@@ -1,5 +1,20 @@
-import { Text } from "react-native";
+/**
+ * Home Screen
+ *
+ * Fetches the products from the API and put the products to the cart.
+ */
 
-export default function HomeScreen() {
-  return <Text className="!bg-red-600 text-lg mt-10">Hello!</Text>;
-}
+// External Dependencies
+import { Text } from "react-native";
+import { FC } from "react";
+
+const HomeScreen: FC = () => {
+  return (
+    <>
+      <Text className="text-6xl">Home Page!</Text>
+      <Text className="text-3xl">Will come soon!</Text>
+    </>
+  );
+};
+
+export default HomeScreen;
