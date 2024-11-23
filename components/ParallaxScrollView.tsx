@@ -8,6 +8,7 @@
 import { PropsWithChildren, FC } from "react";
 import Animated, { useAnimatedRef } from "react-native-reanimated";
 
+// Internal Dependencies
 import { useBottomTabOverflow } from "@/components/ui/TabBarBackground";
 
 const ParallaxScrollView: FC<PropsWithChildren> = ({ children }) => {
