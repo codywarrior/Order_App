@@ -5,16 +5,14 @@
  */
 
 // External Dependencies
-import { Text } from "react-native";
+
 import { FC } from "react";
 
+// Internal Dependencies
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+
 const HomeScreen: FC = () => {
-  return (
-    <>
-      <Text className="text-6xl">Home Page!</Text>
-      <Text className="text-3xl">Will come soon!</Text>
-    </>
-  );
+  return <ParallaxScrollView></ParallaxScrollView>;
 };
 
 export default HomeScreen;
