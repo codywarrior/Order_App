@@ -34,7 +34,9 @@ const AddCartModal: FC<AddCartModalProps> = ({ product, addCart, onClose }) => {
   const [subtotal, setSubTotal] = useState(0);
 
   useEffect(() => {
-    setSubTotal(quantity * Number(discounted_price || price || 0));
+    setSubTotal(
+      Number((quantity * Number(discounted_price || price || 0)).toFixed(2)),
+    );
   }, [quantity, price, discounted_price]);
 
   return (
