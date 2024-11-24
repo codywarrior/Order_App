@@ -44,7 +44,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
         </TouchableOpacity>
       </View>
       <View className="flex items-start">
-        <Text className="text-base text-secondary">{supplier}</Text>
+        <Text className="text-base text-secondary underline">{supplier}</Text>
         <Text className="text-lg text-primary">{name}</Text>
         <View className="flex-row items-center gap-2 w-full">
           {discounted_price ? (
