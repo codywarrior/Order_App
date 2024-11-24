@@ -41,9 +41,9 @@ const Quantity: FC<QuantityProps> = ({ value, setValue }) => {
         />
         <TouchableOpacity
           onPress={() => value < 100 && setValue(value + 1)}
-          className="bg-primary rounded-tr-lg rounded-br-lg size-10 flex"
+          className="bg-primary rounded-tr-lg rounded-br-lg size-10 flex border-t border-b border-solid border-primary"
         >
-          <Text className="text-2xl text-white flex-1 items-center justify-center text-center border-t border-b border-solid border-primary">
+          <Text className="text-2xl text-white flex-1 items-center justify-center text-center">
             {"+"}
           </Text>
         </TouchableOpacity>

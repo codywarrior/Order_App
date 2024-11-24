@@ -6,7 +6,7 @@
 
 // External Dependencies
 import { Modal, View, Image, Text, TouchableOpacity } from "react-native";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 // Internal Dependencies
@@ -20,12 +20,26 @@ interface AddCartModalProps {
 }
 
 const AddCartModal: FC<AddCartModalProps> = ({ product, addCart, onClose }) => {
-  const { image, name, unit_size, price, discounted_price } = product;
+  const {
+    image,
+    supplier,
+    name,
+    unit_size,
+    price,
+    discounted_price,
+    nacs_category,
+    nacs_subcategory,
+  } = product;
   const [quantity, setQuantity] = useState(0);
+  const [subtotal, setSubTotal] = useState(0);
+
+  useEffect(() => {
+    setSubTotal(quantity * Number(discounted_price || price || 0));
+  }, [quantity, price, discounted_price]);
 
   return (
     <Modal animationType="slide" transparent={true}>
-      <View className="w-full absolute bottom-0 p-10 h-1/3 flex flex-col bg-white mb-12">
+      <View className="w-full absolute bottom-0 p-10 h-1/2 flex flex-col bg-white mb-12">
         <View className="w-full flex flex-row justify-end">
           <TouchableOpacity onPress={onClose}>
             <AntDesign name="close" size={24} color="#356b82" />
@@ -42,6 +56,22 @@ const AddCartModal: FC<AddCartModalProps> = ({ product, addCart, onClose }) => {
           </View>
           <View className="w-2/3">
             <Text className="text-xl text-primary font-bold">{name}</Text>
+            <View className="flex flex-row items-center justify-between">
+              <Text className="text-lg text-primary">Supplier</Text>
+              <Text className="ml-auto text-lg text-primary">{supplier}</Text>
+            </View>
+            <View className="flex flex-row items-center justify-between">
+              <Text className="text-lg text-primary">Category</Text>
+              <Text className="ml-auto text-lg text-primary">
+                {nacs_category}
+              </Text>
+            </View>
+            <View className="flex flex-row items-center justify-between">
+              <Text className="text-lg text-primary">Sub-Category</Text>
+              <Text className="ml-auto text-lg text-primary">
+                {nacs_subcategory}
+              </Text>
+            </View>
             <View className="flex flex-row items-center justify-between">
               <Text className="text-lg text-primary">Unit Size</Text>
               <Text className="ml-auto text-lg text-primary">{unit_size}</Text>
@@ -69,8 +99,12 @@ const AddCartModal: FC<AddCartModalProps> = ({ product, addCart, onClose }) => {
           <Text className="text-xl text-primary font-bold">Quantity</Text>
           <Quantity value={quantity} setValue={setQuantity} />
         </View>
+        <View className="flex flex-row items-center mt-8">
+          <Text className="text-xl text-primary font-bold">Total Price</Text>
+          <Text className="text-lg text-primary ml-auto">$ {subtotal}</Text>
+        </View>
         <TouchableOpacity
-          className="bg-secondary flex-row justify-center items-center p-2 mt-2"
+          className="bg-secondary flex-row justify-center items-center p-2 mt-auto mr-1"
           onPress={() => {
             addCart(product, quantity);
             onClose();
