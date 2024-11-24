@@ -16,7 +16,7 @@ import { mockProducts } from "@/constants/Products";
 
 const HomeScreen: FC = () => {
   return (
-    <View className="bg-secondary">
+    <View className="bg-secondary flex-1">
       <FlatList
         data={mockProducts}
         keyExtractor={(item) => item.id.toString()}

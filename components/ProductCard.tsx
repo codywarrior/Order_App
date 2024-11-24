@@ -16,29 +16,51 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({ product }) => {
+  const { image, price, supplier, name, discounted_price } = product;
+
+  const addProductToCart = () => {
+    // TODO: Add Product To Cart.
+  };
+
   return (
-    <View className="bg-white w-60 h-96 rounded-lg shadow-md">
-      <View className="absolute top-2 left-2 bg-green-200 rounded-lg px-2">
-        <Text className="text-green-600 font-bold text-xs">sale</Text>
-      </View>
-      <Image
-        source={{ uri: product.image || "" }}
-        className="h-20 w-full object-contain mb-2"
-        resizeMode="contain"
-      />
-      <Text className="text-gray-700 text-xs">Store</Text>
-      <Text className="text-black font-bold text-sm">title</Text>
-      <View className="flex-row items-center mt-2">
-        <Text className="text-green-600 font-bold text-sm">
-          {product.price}
+    <View className="bg-white w-60 h-96 rounded-lg shadow-md p-8 flex justify-start items-center">
+      <View className="relative block">
+        <Image
+          source={{ uri: image || "" }}
+          defaultSource={require("../assets/images/fallback.png")}
+          className="h-40 w-40 object-contain mb-2"
+          resizeMode="contain"
+        />
+        <Text className="text-white bg-light-green top-8 left-0 px-4 py-0.5 block absolute rounded-3xl">
+          Sales
         </Text>
-        <Text className="text-gray-400 text-xs line-through ml-2">
-          {/* {product.salePrice} */}
-        </Text>
+        <TouchableOpacity
+          className="bg-light-blue absolute w-10 h-10 p-2 rounded-full flex justify-center bottom-0 right-0"
+          onPress={addProductToCart}
+        >
+          <Text className="text-white font-bold text-center text-2xl align-middle">
+            +
+          </Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity className="bg-blue-500 mt-2 p-2 rounded-full">
-        <Text className="text-white font-bold text-center">+</Text>
-      </TouchableOpacity>
+      <View className="flex items-start">
+        <Text className="text-base text-secondary">{supplier}</Text>
+        <Text className="text-lg text-primary">{name}</Text>
+        <View className="flex-row items-center gap-2 w-full">
+          {discounted_price ? (
+            <>
+              <Text className="text-light-green text-base">
+                ${discounted_price}
+              </Text>
+              <Text className="text-light-red text-base line-through stroke-light-red">
+                ${price}
+              </Text>
+            </>
+          ) : (
+            <Text className="text-light-green text-base">${price}</Text>
+          )}
+        </View>
+      </View>
     </View>
   );
 };
