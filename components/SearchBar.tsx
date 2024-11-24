@@ -6,7 +6,7 @@
 
 // External Dependencies
 import { FC } from "react";
-import { View, TextInput, Pressable } from "react-native";
+import { View, TextInput, TouchableOpacity } from "react-native";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -27,9 +27,9 @@ const SearchBar: FC<SearchBarProps> = ({ value, onChange }) => {
         onChangeText={(text) => onChange(text)}
       />
       {value && (
-        <Pressable onPress={() => onChange("")}>
+        <TouchableOpacity onPress={() => onChange("")}>
           <AntDesign name="closecircle" size={16} color="#0a7ea4" />
-        </Pressable>
+        </TouchableOpacity>
       )}
     </View>
   );
