@@ -27,6 +27,20 @@ const CartScreen: FC = observer(() => {
   const cartItems = store.getCartProducts();
   const isLoading = store.products.length === 0;
 
+  const filteredCartItems = useMemo(() => {
+    if (store.keyword === "") {
+      return cartItems;
+    } else {
+      return (
+        cartItems?.filter(
+          ({ product }) =>
+            product.name &&
+            product.name.toLowerCase().includes(store.keyword.toLowerCase()),
+        ) || []
+      );
+    }
+  }, [cartItems, store.keyword]);
+
   if (isLoading) {
     return (
       <View className="flex-1 justify-center items-center">
@@ -49,20 +63,6 @@ const CartScreen: FC = observer(() => {
       </View>
     );
   }
-
-  const filteredCartItems = useMemo(() => {
-    if (store.keyword === "") {
-      return cartItems;
-    } else {
-      return (
-        cartItems?.filter(
-          ({ product }) =>
-            product.name &&
-            product.name.toLowerCase().includes(store.keyword.toLowerCase()),
-        ) || []
-      );
-    }
-  }, [cartItems, store.keyword]);
 
   const getCheckoutPrice = () => {
     return cartItems

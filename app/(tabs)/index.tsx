@@ -27,6 +27,19 @@ const HomeScreen: FC = observer(() => {
     },
   );
 
+  const filteredProducts = useMemo(() => {
+    if (store.keyword === "") {
+      return data;
+    } else {
+      return (
+        data?.filter(
+          ({ name }) =>
+            name && name.toLowerCase().includes(store.keyword.toLowerCase()),
+        ) || []
+      );
+    }
+  }, [data, store.keyword]);
+
   if (isLoading) {
     return (
       <View className="flex-1 justify-center items-center">
@@ -43,19 +56,6 @@ const HomeScreen: FC = observer(() => {
       </View>
     );
   }
-
-  const filteredProducts = useMemo(() => {
-    if (store.keyword === "") {
-      return data;
-    } else {
-      return (
-        data?.filter(
-          ({ name }) =>
-            name && name.toLowerCase().includes(store.keyword.toLowerCase()),
-        ) || []
-      );
-    }
-  }, [data, store.keyword]);
 
   return (
     <View className="bg-secondary flex-1">
