@@ -29,6 +29,7 @@ UI should looks similar to [this](https://lh7-rt.googleusercontent.com/docsz/AD_
   - _Advantages:_
     - Easy setup without any boilerplate.
     - Easy to use and implement logic.
+- Lint / Prettier / Husky
 
 ## Project Structure
 
@@ -50,6 +51,7 @@ Developed on Android SDK 15.
 - Added some more information on the ProductDetailModal.
 - Added `CheckoutConfirmationModal` for asking the user's confirmation before checkout.
 - Implemented TailwindCSS/Nativewind for styling.
+- Added debouncing and memoization for performance improvements.
 
 ## Possible Improvements
 
