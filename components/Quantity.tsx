@@ -28,7 +28,7 @@ const Quantity: FC<QuantityProps> = ({ value, setValue }) => {
         <TextInput
           keyboardType={"number-pad"}
           maxLength={3}
-          className="border border-solid border-primary p-1 text-center w-1/5 box-border"
+          className="border border-solid border-primary p-1 text-center w-1/5 h-10 box-border"
           value={`${value}`}
           onChangeText={(txt) => {
             const num = Number(txt);

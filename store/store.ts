@@ -18,8 +18,30 @@ class ProductStore {
   addProductToCart = (product: Product, quantity: number) => {
     // check if the product is already in cart
     const existing = this.cart.get(product.id);
-    // update cart
-    this.cart.set(product.id, (existing || 0) + quantity);
+
+    // If the product is removed from the cart
+    if ((existing || 0) + quantity === 0) {
+      this.cart.delete(product.id);
+    } else {
+      this.cart.set(product.id, (existing || 0) + quantity);
+    }
+  };
+
+  // Return Products in the Cart
+  getCartProducts = () => {
+    const cartProductKeys = Array.from(this.cart.entries());
+    const cartProducts = cartProductKeys.map(([key, count]) => ({
+      product: this.products.find(({ id }) => id === key)!,
+      count,
+    }));
+    return cartProducts;
+  };
+
+  checkout = () => {
+    // TODO: Need to implement detailed checkout logic
+
+    // Clear Cart
+    this.cart = new Map<number, number>();
   };
 }
 
