@@ -1,50 +1,99 @@
-# Welcome to your Expo app 👋
+# Order App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Requirements
 
-## Get started
+Build an order book. At Attain, we build software for distributors. An order book is what stores use to buy inventory from their distributors.
+UI should looks similar to [this](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcUvNrYW917l12MRaHsqpEQV1gWXfJTfdp-OrxF8hGPehcfQQjMCMz6hdl-qR_P5kolJMI5H_YKnVm_dXfIQBSPM_mSPK7-JDdTiR-fuP8iZ5ThE54PIZkUpdoxO9vTplpihrYt?key=1HiZrqwiJ5rCGWLjaJQZlot-)
 
-1. Install dependencies
+- Order Book should fetch the product data from the [API](https://retoolapi.dev/f0ee0v/items)
+- Shoud place a Header component with Searchbar.
+- On the page, should render the product information following the given design.
+- When user clicks the `+` button on the ProductCard, should put the product in the Cart.
+- Should implement cart management logic.
 
-   ```bash
-   npm install
-   ```
+## Tech-Stacks
 
-2. Start the app
+- React Native
+- [Expo](https://expo.dev)
+- Typescript
+- TailwindCSS/Nativewind
+  - _Advantages:_
+    - Provide consistent styling across the application rather than using StyleSheet object.
+    - Powerful Customization.
+    - Reusability.
+- React Query/Tanstack
+  - _Advantages:_
+    - Better state management on both client/server side.
+    - Automatic state management of API integration.
+- MobX
+  - _Advantages:_
+    - Easy setup without any boilerplate.
+    - Easy to use and implement logic.
 
-   ```bash
-    npx expo start
-   ```
+## Project Structure
 
-In the output, you'll find options to open the app in a
+- `/app`: Includes the source files of the pages. Implemented the folder-structure based routing.
+- `/component`: Includes the custom components across the application.
+- `/assets`: Includes the assets of the application. Included fonts and images for the application here.
+- `/services`: Includes the helper functions that interacts with APIs.
+- `/store`: State management with MobX.
+- `/Types`: Common type definition here.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Dev-Platform
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Developed on Android SDK 15.
 
-## Get a fresh project
+## Implemented features
 
-When you're ready, run:
+- Implemented all of the requirements.
+- Implemented `Cart` page with draft checkout functionality.
+- Added some more information on the ProductDetailModal.
+- Added `CheckoutConfirmationModal` for asking the user's confirmation before checkout.
+- Implemented TailwindCSS/Nativewind for styling.
 
-```bash
-npm run reset-project
-```
+## Possible Improvements
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Integrate the custom fonts following the given design.
+- Implement User management and keeping the cart information for each users.
+- Implement better animation for UX.
+- Implement `Browse` and `Orders` View.
+- Implement exact `Checkout` functionality.
 
-## Learn more
+## Setup Guide
 
-To learn more about developing your project with Expo, look at the following resources:
+- Cloning the repository
+  Should clone the repository [here](https://github.com/edwardliu92/Order_App)
+- Setup the Runtime Environment
+  - Follow [this](https://docs.expo.dev/get-started/set-up-your-environment/) instruction to setup the dev environment.
+  - Recommended dev platform: Target Android platform on Windows OS.
+  - Setup Node v20 and Yarn package manager.
+  ```shell
+     npm install -g yarn
+  ```
+- Run the App.
+  - Running the IOS App
+  ```shell
+     npx yarn run ios
+  ```
+  - Running the Android App _Prefered_
+  ```shell
+     npx yarn run android
+  ```
+  - Running the Web App
+  ```shell
+     npx yarn run web
+  ```
+  - Running the Expo Daemon and follow the give instruction
+    You can run the Expo Daemon by running `npx yarn start` and follow the instruction there to open the application.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Screenshots
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- ![Loading App](./assets/screenshots/AppLoading.png)
+- ![Loading Product](./assets/screenshots/ProductLoading.png)
+- ![Products View](./assets/screenshots/Products.png)
+- ![Adding Product To Cart](./assets/screenshots/AddingCart.png)
+- ![Updated Product Status](./assets/screenshots/ProductPageWithUpdatedInfo.png)
+- ![Browse View](./assets/screenshots/Browse.png)
+- ![Order View](./assets/screenshots/Orders.png)
+- ![Cart View](./assets/screenshots/Cart.png)
+- ![Checkout Confirmation](./assets/screenshots/CheckoutConfirmation.png)
