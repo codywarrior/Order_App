@@ -4,6 +4,7 @@ import { makeAutoObservable } from "mobx";
 class ProductStore {
   products: Product[] = [];
   cart: Map<number, number> = new Map<number, number>();
+  keyword = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -42,6 +43,11 @@ class ProductStore {
 
     // Clear Cart
     this.cart = new Map<number, number>();
+  };
+
+  // setFilterKey
+  setKeyword = (key: string) => {
+    this.keyword = key;
   };
 }
 

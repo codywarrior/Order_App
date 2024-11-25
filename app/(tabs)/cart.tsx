@@ -12,7 +12,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { observer } from "mobx-react-lite";
 
@@ -50,6 +50,20 @@ const CartScreen: FC = observer(() => {
     );
   }
 
+  const filteredCartItems = useMemo(() => {
+    if (store.keyword === "") {
+      return cartItems;
+    } else {
+      return (
+        cartItems?.filter(
+          ({ product }) =>
+            product.name &&
+            product.name.toLowerCase().includes(store.keyword.toLowerCase()),
+        ) || []
+      );
+    }
+  }, [cartItems, store.keyword]);
+
   const getCheckoutPrice = () => {
     return cartItems
       .map(({ product, count }) => {
@@ -64,7 +78,7 @@ const CartScreen: FC = observer(() => {
     <>
       <View className="bg-secondary flex-1">
         <FlatList
-          data={cartItems}
+          data={filteredCartItems}
           keyExtractor={(item) => `${item.product.id}`}
           renderItem={({ item }) => (
             <CartProductItem product={item.product} count={item.count} />

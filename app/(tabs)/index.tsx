@@ -6,7 +6,7 @@
 
 // External Dependencies
 
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import { useQuery } from "react-query";
 import { observer } from "mobx-react-lite";
@@ -16,11 +16,16 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import ProductCard from "@/components/ProductCard";
 import store from "@/store/store";
 import { fetchProducts } from "@/services/product";
+import { Product } from "@/Types/Product.type";
 
 const HomeScreen: FC = observer(() => {
-  const { data, isLoading, error } = useQuery("products", fetchProducts, {
-    onSuccess: (data) => store.setProducts(data),
-  });
+  const { data, isLoading, error } = useQuery<Product[]>(
+    "products",
+    fetchProducts,
+    {
+      onSuccess: (data) => store.setProducts(data),
+    },
+  );
 
   if (isLoading) {
     return (
@@ -39,10 +44,23 @@ const HomeScreen: FC = observer(() => {
     );
   }
 
+  const filteredProducts = useMemo(() => {
+    if (store.keyword === "") {
+      return data;
+    } else {
+      return (
+        data?.filter(
+          ({ name }) =>
+            name && name.toLowerCase().includes(store.keyword.toLowerCase()),
+        ) || []
+      );
+    }
+  }, [data, store.keyword]);
+
   return (
     <View className="bg-secondary flex-1">
       <FlatList
-        data={data}
+        data={filteredProducts}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <ProductCard product={item} />}
         numColumns={2}
